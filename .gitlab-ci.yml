@@ -1,0 +1,33 @@
+# https://hub.docker.com/r/library/node/tags/
+image: node:14
+
+before_script:
+  - git config user.email "info@chillicode.ru"
+  - git config user.name "Chillicode"
+
+stages:
+  - test
+  - deploy
+
+run_tests:
+  stage: test
+  script:
+    - npm ci
+    - npm run linters:inspect
+
+deploy_to_dev:
+  stage: deploy
+  only:
+    - dev
+  script:
+    - git checkout -b $CI_JOB_ID
+    - git add .
+    - git commit --allow-empty -m "Heroku deployment"
+    - git push --force $HEROKU_REMOTE_GIT_URL $CI_JOB_ID:main
+
+deploy_to_prod:
+  stage: deploy
+  only:
+    - master
+  script:
+    - echo "Deployed to production-server"

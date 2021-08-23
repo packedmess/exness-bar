@@ -1,0 +1,189 @@
+[
+  {
+    "id": 36,
+    "name": "Coca Cola",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497268036/Soda-Coke_zsqdld.jpg",
+    "description": "",
+    "volume": "",
+    "alcohol": false,
+    "hot": false,
+    "status": 0,
+    "category_id": 1
+  },
+  {
+    "id": 35,
+    "name": "Sprite",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497276885/Soda-Sprite_r5ysgz.jpg",
+    "description": "",
+    "volume": "",
+    "alcohol": false,
+    "hot": false,
+    "status": 0,
+    "category_id": 1
+  },
+  {
+    "id": 35,
+    "name": "KEO",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497262287/Beer-Keo_tlq9hl.jpg",
+    "description": "",
+    "volume": "500 ml",
+    "alcohol": true,
+    "hot": false,
+    "status": 0,
+    "category_id": 2
+  },
+  {
+    "id": 32,
+    "name": "Skin rejuvenation Orange",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497262291/Smoothie-White_hinufu.jpg",
+    "description": "Orange, cucumber, coconut water, pineapple, bananas, vanilla bean, spinach",
+    "volume": "",
+    "alcohol": false,
+    "hot": false,
+    "status": 0,
+    "category_id": 3
+  },
+  {
+    "id": 123,
+    "name": "Figaro Figaro",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497262291/Smoothie-White_hinufu.jpg",
+    "description": "Figs, banana, strawberry, vanilla, dash of honey and cinnamon, coconut milk",
+    "volume": "",
+    "alcohol": false,
+    "hot": false,
+    "status": 0,
+    "category_id": 3
+  },
+  {
+    "id": 9,
+    "name": "Frozen Pineapple Margarita",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497262288/Frozen-Pineapple-Margarita_jhmxdc.jpg",
+    "description": "Frozen pineapple chunks, lime juice, tequila, sugar, ice, triple sec",
+    "volume": "",
+    "alcohol": true,
+    "hot": false,
+    "status": 0,
+    "category_id": 5
+  },
+  {
+    "id": 54,
+    "name": "Kiwi Smash",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497262290/Kiwi-Smash_yrwciu.jpg",
+    "description": "Kiwi, tequila, pineapple juice, mint",
+    "volume": "",
+    "alcohol": true,
+    "hot": false,
+    "status": 0,
+    "category_id": 5
+  },
+  {
+    "id": 58,
+    "name": "Frozen Pear Margarita",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497262288/Frozen-Pear-Margarita_z81nuh.jpg",
+    "description": "Pear, lime juice, sugar, tequila, triple sec",
+    "volume": "",
+    "alcohol": true,
+    "hot": false,
+    "status": 0,
+    "category_id": 5
+  },
+  {
+    "id": 15,
+    "name": "Body Cleansing Celery",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497262289/Juice-Green_qn4wf9.jpg",
+    "description": "Celery, cucumber, spinach, mint, pineapple, lemon, apple",
+    "volume": "",
+    "alcohol": false,
+    "hot": false,
+    "status": 0,
+    "category_id": 6
+  },
+  {
+    "id": 117,
+    "name": "Golden Tequila",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497262291/Salty-Chichuacha_b0uowx.jpg",
+    "description": "",
+    "volume": "",
+    "alcohol": true,
+    "hot": false,
+    "status": 0,
+    "category_id": 7
+  },
+  {
+    "id": 76,
+    "name": "Protein shake",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497275128/Protein_ql0a5o.jpg",
+    "description": "Almond milk, banana, peanut butter, whey protein, cocoa",
+    "volume": "",
+    "alcohol": false,
+    "hot": false,
+    "status": 0,
+    "category_id": 8
+  },
+  {
+    "id": 77,
+    "name": "Pre-workout Strawberries",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497275128/Protein_ql0a5o.jpg",
+    "description": "Strawberries , banana, pineapple, spinach, oats, dates, vanilla bean, almond milk",
+    "volume": "",
+    "alcohol": false,
+    "hot": false,
+    "status": 0,
+    "category_id": 8
+  },
+  {
+    "id": 8,
+    "name": "Rose wine",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497278404/Wine-rose_qy774r.jpg",
+    "description": "",
+    "volume": "",
+    "alcohol": true,
+    "hot": false,
+    "status": 0,
+    "category_id": 9
+  },
+  {
+    "id": 86,
+    "name": "Red wine",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497278407/Wine-red_ndlpjn.jpg",
+    "description": "",
+    "volume": "",
+    "alcohol": true,
+    "hot": false,
+    "status": 0,
+    "category_id": 9
+  },
+  {
+    "id": 8,
+    "name": "White wine",
+    "photo": "https://res.cloudinary.com/dpgsnafcu/image/upload/v1497278402/Wine-white_d96jwl.jpg",
+    "description": "",
+    "volume": "",
+    "alcohol": true,
+    "hot": false,
+    "status": 0,
+    "category_id": 9
+  },
+  {
+    "id": 129,
+    "name": "Miyagi",
+    "photo": "https://res.cloudinary.com/dero6pkfq/image/upload/v1513672402/master_wf0rbg.png",
+    "description": "Lemon grass, lime, honey",
+    "volume": "",
+    "alcohol": false,
+    "hot": true,
+    "status": 0,
+    "category_id": 10
+  },
+  {
+    "id": 132,
+    "name": "Aladdin",
+    "photo": "https://res.cloudinary.com/dero6pkfq/image/upload/v1513845342/Aladdin_tea_yfvhym.png",
+    "description": "Apple, lime, ginger",
+    "volume": "",
+    "alcohol": false,
+    "hot": true,
+    "status": 0,
+    "category_id": 10
+  }
+]
