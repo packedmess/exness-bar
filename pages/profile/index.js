@@ -9,7 +9,6 @@ import MuiButton from '@material-ui/core/Button';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {makeStyles} from '@material-ui/core/styles';
 import Page from '@/components/Page';
-import ProfileComments from '@/sections/profileComments/ProfileComments';
 import Orders from '@/sections/orders';
 import {connectMobX} from '@/mobx';
 import {concatLinks} from '@/utils/url';
@@ -74,14 +73,9 @@ const Profile = ({store}) => {
               </MuiButton>
             </MuiGrid>
             {!isBarman && (
-              <>
-                <MuiGrid item>
-                  <Orders isProfilePage />
-                </MuiGrid>
-                <MuiGrid item>
-                  <ProfileComments />
-                </MuiGrid>
-              </>
+              <MuiGrid item>
+                <Orders isProfilePage />
+              </MuiGrid>
             )}
           </MuiGrid>
         </MuiBox>

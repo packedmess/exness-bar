@@ -10,7 +10,7 @@ import CardList from './CardList';
 const Catalog = ({store}) => {
   return (
     <MuiBox>
-      <MuiContainer>
+      <MuiContainer maxWidth="xl">
         {store.categoriesStore.categories.map(category => {
           const drinks = store.drinksStore.filterDrinksByCategory(category.id);
 

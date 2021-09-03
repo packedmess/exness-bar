@@ -100,7 +100,7 @@ const Header = ({isLoggedIn, isCatalogPage, avatar, store}) => {
 
   return (
     <MuiAppBar position="sticky">
-      <MuiContainer>
+      <MuiContainer maxWidth="xl">
         <MuiToolbar disableGutters={true}>
           <MuiGrid container direction="row" alignItems="center" spacing={2}>
             <MuiGrid item className={classes.logoWrapper}>

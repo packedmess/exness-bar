@@ -12,6 +12,7 @@ import MuiTooltip from '@material-ui/core/Tooltip';
 import {makeStyles} from '@material-ui/core/styles';
 import {connectMobX} from '@/mobx';
 import {Role} from '@/utils/enums';
+import cn from 'classnames';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     '&:hover, &:active': {
       boxShadow: '0px 2px 4px 0px rgb(0 0 0 / 20%), 0px 2px 3px 0px rgb(0 0 0 / 14%), 0px 1px 6px 0px rgb(0 0 0 / 12%)',
     },
+    cursor: 'pointer',
   },
   icons: {
     position: 'absolute',
@@ -37,6 +39,26 @@ const useStyles = makeStyles(theme => ({
   content: {
     display: 'grid',
     gridTemplateRows: 'auto auto 1fr auto',
+  },
+  overlay: {
+    position: 'absolute',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    color: theme.palette.secondary.main,
+    opacity: 0,
+    transition: 'opacity 0.25s ease-in-out',
+    '&:hover, &:active': {
+      opacity: 1,
+    },
+  },
+  inCart: {
+    opacity: 1,
   },
   buttons: {
     display: 'flex',
@@ -60,7 +82,7 @@ const Card = ({drink, handleModalOpen, handleDrinkDelete, handleAddToCart, isInC
   const isBarman = store.authStore.info.role === Role.BARMAN;
 
   return (
-    <MuiCard className={classes.root}>
+    <MuiCard className={classes.root} onClick={() => handleAddToCart(drink.id)}>
       <MuiGrid container className={classes.icons}>
         {drink['has_alcohol'] && (
           <MuiGrid item>
@@ -79,41 +101,35 @@ const Card = ({drink, handleModalOpen, handleDrinkDelete, handleAddToCart, isInC
       </MuiGrid>
       <MuiCardMedia className={classes.image} image={drink.picture} />
       <MuiCardContent className={classes.content}>
-        <MuiTypography variant="h4" gutterBottom>
+        <MuiTypography variant="h5" gutterBottom>
           {drink.title}
         </MuiTypography>
         <MuiTypography variant="body2" color="textSecondary" gutterBottom>
           {drink.volume ? `${drink.volume} ml` : null}
         </MuiTypography>
         <MuiTypography variant="body2">{drink.description}</MuiTypography>
-        <MuiBox className={classes.buttons}>
-          {isBarman ? (
-            <>
-              <MuiButton
-                variant="contained"
-                color="secondary"
-                className={classes.button}
-                onClick={() => handleModalOpen(drink.id)}>
-                Edit
-              </MuiButton>
-              <MuiButton
-                variant="contained"
-                color="primary"
-                className={classes.button}
-                onClick={() => handleDrinkDelete(drink.id)}>
-                Delete
-              </MuiButton>
-            </>
-          ) : (
+        {isBarman ? (
+          <MuiBox className={classes.buttons}>
             <MuiButton
               variant="contained"
               color="secondary"
-              className={classes.buttonFullWidth}
-              onClick={() => handleAddToCart(drink.id)}>
-              {isInCart ? 'In сart' : 'Add to cart'}
+              className={classes.button}
+              onClick={() => handleModalOpen(drink.id)}>
+              Edit
             </MuiButton>
-          )}
-        </MuiBox>
+            <MuiButton
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={() => handleDrinkDelete(drink.id)}>
+              Delete
+            </MuiButton>
+          </MuiBox>
+        ) : (
+          <div className={cn(classes.overlay, isInCart ? classes.inCart : null)}>
+            <MuiTypography variant="h5">{isInCart ? 'In сart' : 'Add to cart'}</MuiTypography>
+          </div>
+        )}
       </MuiCardContent>
     </MuiCard>
   );
