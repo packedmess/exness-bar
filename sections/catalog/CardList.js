@@ -11,7 +11,7 @@ import EditCard from './EditCard';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'grid',
-    gridTemplateColumns: `repeat(auto-fill, minmax(${theme.spacing(25)}px, 1fr))`,
+    gridTemplateColumns: `repeat(auto-fill, minmax(${theme.spacing(20)}px, 1fr))`,
     gap: theme.spacing(2),
   },
 }));

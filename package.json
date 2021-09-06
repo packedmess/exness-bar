@@ -48,7 +48,6 @@
     "react-dom": "^16.14.0",
     "react-facebook-login": "^4.1.1",
     "react-final-form": "^6.5.3",
-    "react-scroll": "^1.8.2",
     "react-svg-loader": "^3.0.3"
   }
 }

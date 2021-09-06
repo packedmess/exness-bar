@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import MuiContainer from '@material-ui/core/Container';
 import {makeStyles} from '@material-ui/core/styles';
 import MuiBox from '@material-ui/core/Box';
 import MuiTypography from '@material-ui/core/Typography';
-import {Element} from 'react-scroll';
 import {connectMobX} from '@/mobx';
 import MuiChip from '@material-ui/core/Chip';
 import CardList from './CardList';
@@ -24,51 +23,85 @@ const useStyles = makeStyles(theme => ({
 const Catalog = ({store}) => {
   const classes = useStyles();
 
-  // const drinksByCategory = store.categoriesStore.categories.reduce((acc, meta) => {
-  //   const drinks = store.drinksStore.filterDrinksByCategory(meta.id);
+  const [categoryData, setCategoryData] = useState([]);
 
-  //   if (drinks.length === 0) return acc;
+  const drinksByCategoryData = store.categoriesStore.categories.reduce((acc, category) => {
+    const drinks = store.drinksStore.filterDrinksByCategory(category.id);
 
-  //   return [
-  //     ...acc,
-  //     {
-  //       meta,
-  //       drinks,
-  //     },
-  //   ];
-  // }, []);
+    if (drinks.length === 0) return acc;
 
-  const data = store.categoriesStore.categories
-    .map(category => {
-      const drinks = store.drinksStore.filterDrinksByCategory(category.id);
+    return [
+      ...acc,
+      {
+        category,
+        isActive: false,
+        drinks,
+      },
+    ];
+  }, []);
 
-      if (drinks.length === 0) {
-        return null;
+  const allCategoryData = [
+    {
+      category: {
+        id: 0,
+        title: 'All',
+      },
+      isActive: true,
+      drinks: store.drinksStore,
+    },
+    ...drinksByCategoryData,
+  ];
+
+  useEffect(() => {
+    setCategoryData(allCategoryData);
+  }, []);
+
+  const handleSetFilterByCategory = id => {
+    const newCategoryData = categoryData.map(item => {
+      if (item.category.id === id) {
+        return {
+          ...item,
+          isActive: true,
+        };
       }
+      return {
+        ...item,
+        isActive: false,
+      };
+    });
 
-      return {category, drinks};
-    })
-    .filter(item => item !== null);
+    setCategoryData(newCategoryData);
+
+    const activeCategory = newCategoryData.find(item => item.isActive === true);
+    const activeCategoryId = activeCategory.category.id;
+
+    store.drinksStore.fetchFilteredData(activeCategoryId === 0 ? '' : `category_id=${activeCategoryId}`);
+  };
 
   return (
     <MuiBox>
       <MuiContainer maxWidth="xl">
         <MuiBox paddingY={2} className={classes.chipList}>
-          {data.map(item => {
+          {categoryData.map(item => {
             return (
-              <MuiChip key={item.category.id} label={item.category.title} clickable color="" className={classes.chip} />
+              <MuiChip
+                key={item.category.id}
+                label={item.category.title}
+                clickable
+                color={item.isActive ? 'primary' : ''}
+                className={classes.chip}
+                onClick={() => handleSetFilterByCategory(item.category.id)}
+              />
             );
           })}
         </MuiBox>
-        {data.map(item => {
+        {drinksByCategoryData.map(item => {
           return (
             <MuiBox key={item.category.id} paddingBottom={2}>
-              <Element name={item.category.title}>
-                <MuiTypography variant="h3" component="h2" gutterBottom>
-                  {item.category.title}
-                </MuiTypography>
-                <CardList drinks={item.drinks} />
-              </Element>
+              <MuiTypography variant="h3" component="h2" gutterBottom>
+                {item.category.title}
+              </MuiTypography>
+              <CardList drinks={item.drinks} />
             </MuiBox>
           );
         })}

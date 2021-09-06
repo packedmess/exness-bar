@@ -14,18 +14,15 @@ import LogoMobileIcon from 'public/assets/icons/logo-mobile.svg';
 import Modal from '@/components/Modal';
 import Cart from '@/components/Cart';
 import EditCard from '@/sections/catalog/EditCard';
-import TuneIcon from '@material-ui/icons/Tune';
-import MenuIcon from '@material-ui/icons/Menu';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import {makeStyles} from '@material-ui/core/styles';
-import Drawer from '@/components/Drawer';
-import Filters from '@/sections/filters';
 import MuiAvatar from '@material-ui/core/Avatar';
 import Search from '@/components/Search';
 import Pages from '@/sections/pages/Pages';
 import MuiTooltip from '@material-ui/core/Tooltip';
 import {concatLinks} from '@/utils/url';
 import {connectMobX} from '@/mobx';
+import theme from '@/styles/theme';
 
 const useStyles = makeStyles(theme => ({
   logo: {
@@ -41,7 +38,13 @@ const useStyles = makeStyles(theme => ({
     },
   },
   logoWrapper: {
-    flexGrow: 1,
+    marginRight: 'auto',
+  },
+  page: {
+    marginRight: theme.spacing(4),
+    [theme.breakpoints.down('sm')]: {
+      marginRight: theme.spacing(2),
+    },
   },
 }));
 
@@ -60,16 +63,6 @@ const Header = ({isLoggedIn, isCatalogPage, avatar, store}) => {
     setModalOpened(false);
   };
 
-  const [isDrawerOpened, setDrawerOpened] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setDrawerOpened(true);
-  };
-
-  const handleDrawerClose = () => {
-    setDrawerOpened(false);
-  };
-
   const cartCount = store.cartStore.items.length;
 
   const [searchQuery, setSearchQuery] = React.useState(null);
@@ -78,31 +71,23 @@ const Header = ({isLoggedIn, isCatalogPage, avatar, store}) => {
     setSearchQuery(value);
   };
 
-  const [filtersQuery, setFiltersQuery] = React.useState(null);
 
-  const filters = value => {
-    setFiltersQuery(value);
-  };
 
-  let query = [searchQuery, filtersQuery];
 
-  if (searchQuery && filtersQuery) {
-    query = query.join('&');
-  } else {
-    query = query.join('');
-  }
+
+
 
   React.useEffect(() => {
     if (store.authStore.isLoggedIn) {
-      store.drinksStore.fetchFilteredData(query);
+      store.drinksStore.fetchFilteredData(searchQuery);
     }
-  }, [searchQuery, filtersQuery]);
+  }, [searchQuery]);
 
   return (
     <MuiAppBar position="sticky">
       <MuiContainer maxWidth="xl">
         <MuiToolbar disableGutters={true}>
-          <MuiGrid container direction="row" alignItems="center" spacing={2}>
+          <MuiGrid container direction="row" alignItems="center" spacing={theme.breakpoints.down('sm') ? 0 : 2}>
             <MuiGrid item className={classes.logoWrapper}>
               <MuiLink href={isBarman ? 'orders' : 'catalog'} color="inherit">
                 <LogoIcon width={144} height={18} className={classes.logo} />
@@ -111,28 +96,17 @@ const Header = ({isLoggedIn, isCatalogPage, avatar, store}) => {
             </MuiGrid>
             {isLoggedIn && (
               <>
+                {isBarman && (
+                  <MuiGrid item className={classes.page}>
+                    <Pages isCatalogPage={isCatalogPage} />
+                  </MuiGrid>
+                )}
                 {isCatalogPage && (
                   <MuiGrid item>
                     <Search searchValue={searchValue} />
                   </MuiGrid>
                 )}
-                {isBarman ? (
-                  <MuiIconButton onClick={handleDrawerOpen} color="inherit">
-                    <MuiTooltip title="Menu" arrow>
-                      <MenuIcon />
-                    </MuiTooltip>
-                  </MuiIconButton>
-                ) : (
-                  isCatalogPage && (
-                    <MuiGrid item>
-                      <MuiIconButton onClick={handleDrawerOpen} color="inherit">
-                        <MuiTooltip title="Filters" arrow>
-                          <TuneIcon />
-                        </MuiTooltip>
-                      </MuiIconButton>
-                    </MuiGrid>
-                  )
-                )}
+
                 <MuiGrid item>
                   {isBarman ? (
                     isCatalogPage && (
@@ -164,10 +138,6 @@ const Header = ({isLoggedIn, isCatalogPage, avatar, store}) => {
           </MuiGrid>
         </MuiToolbar>
       </MuiContainer>
-      <Drawer isDrawerOpened={isDrawerOpened} handleDrawerClose={handleDrawerClose}>
-        {isBarman && <Pages isCatalogPage={isCatalogPage} />}
-        {isCatalogPage && <Filters filters={filters} />}
-      </Drawer>
       <Modal
         isModalOpened={isModalOpened}
         handleModalClose={handleModalClose}
